@@ -14,6 +14,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import msk.android.academy.javatemplate.DTO.RecipesDTO;
 import msk.android.academy.javatemplate.DTO.RecipesResponse;
+import msk.android.academy.javatemplate.Database.RecipeEntity;
 import msk.android.academy.javatemplate.NET.Network;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,12 +49,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void showRecipes(@NonNull RecipesResponse response) {
-        final List<RecipesDTO> data = response.getData();
+        List<RecipesDTO> listdto = response.getData();
+        RecipeEntity[] recipes = new RecipeEntity[listdto.size()];
+        int i = 0;
+        for (RecipesDTO x : listdto) {
+            RecipeEntity item = new RecipeEntity(x.getLabel(), x.getImg(), x.getYield(),x.getUrl());
+            RecipesDTO
+        }
 
 
-
-        // mAdapter = new CustomAdapter(getApplicationContext(), data, clickListener);
-        //recyclerView.setAdapter(mAdapter);
 
     }
 }
