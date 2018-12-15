@@ -9,12 +9,13 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 @Dao
 public interface ProductDAO {
 
     @Query("SELECT * FROM products")
-    Observable<List<ProductEntity>> getAll();
+    Single<List<ProductEntity>> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(ProductEntity... products);
