@@ -79,6 +79,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="@tools:sample/date/hhmm"
             />
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
