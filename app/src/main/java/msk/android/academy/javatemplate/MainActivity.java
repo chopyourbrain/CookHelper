@@ -2,6 +2,7 @@ package msk.android.academy.javatemplate;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
