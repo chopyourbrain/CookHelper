@@ -16,6 +16,7 @@ public interface RecipeDAO {
     @Query("SELECT * FROM recipes")
     Observable<List<RecipeEntity>> getAll();
 
+    //Select by id
     @Query("SELECT * FROM recipes WHERE (id = :myid)")
     Observable<RecipeEntity> getById(int myid);
 
