@@ -9,7 +9,7 @@
     android:padding="@dimen/padding"
     android:elevation="@dimen/padding"
     android:orientation="vertical"
-    >
+    tools:ignore="MissingDefaultResource">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
     android:layout_weight="1"
     android:maxLines="1"
     android:textStyle="bold"
-    android:textSize="20sp"
+    android:textSize="@dimen/text_size_title"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
@@ -42,7 +42,7 @@
             android:layout_marginBottom="@dimen/marg_end_bott"
             android:layout_marginEnd="@dimen/marg_end_bott"
             android:scaleType="centerCrop"
-            app:layout_constraintTop_toBottomOf="@+id/text_it_rec_f"
+            app:layout_constraintTop_toBottomOf="@id/text_it_rec_f"
             tools:ignore="MissingConstraints"
 
             tools:src="@tools:sample/backgrounds/scenic" />
