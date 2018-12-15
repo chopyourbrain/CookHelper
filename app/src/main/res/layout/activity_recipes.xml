@@ -34,10 +34,11 @@
         android:layout_marginEnd="@dimen/margin_button"
         android:layout_marginBottom="@dimen/margin_button"
         android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:focusable="true" />
+        app:srcCompat="@drawable/ic_add" />
 
 
 </android.support.constraint.ConstraintLayout>
