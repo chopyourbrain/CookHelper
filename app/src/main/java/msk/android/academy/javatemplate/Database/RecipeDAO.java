@@ -16,6 +16,9 @@ public interface RecipeDAO {
     @Query("SELECT * FROM recipes")
     Observable<List<RecipeEntity>> getAll();
 
+    @Query("SELECT * FROM recipes WHERE (id = :myid)")
+    Observable<RecipeEntity> getById(int myid);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(RecipeEntity... recipes);
 
