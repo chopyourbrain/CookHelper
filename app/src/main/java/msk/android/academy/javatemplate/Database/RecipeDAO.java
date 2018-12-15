@@ -9,16 +9,17 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 @Dao
 public interface RecipeDAO {
 
     @Query("SELECT * FROM recipes")
-    Observable<List<RecipeEntity>> getAll();
+    Single<List<RecipeEntity>> getAll();
 
     //Select by id
     @Query("SELECT * FROM recipes WHERE (id = :myid)")
-    Observable<RecipeEntity> getById(int myid);
+    Single<RecipeEntity> getById(int myid);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(RecipeEntity... recipes);
@@ -33,5 +34,5 @@ public interface RecipeDAO {
     void deleteAll();
 
     @Query("SELECT * FROM products WHERE (recipe_id = :myid)")
-    Observable<List<ProductEntity>> getProducts(int myid);
+    Single<List<ProductEntity>> getProducts(int myid);
 }
