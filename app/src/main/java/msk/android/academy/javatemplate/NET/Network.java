@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Network {
 
-    private static final String URL = "https://api.edamam.com/search";
+    private static final String URL = "https://api.edamam.com/search/";
     private static final String APP_KEY = "1868a1c017985f24e994fa152b978360";
     private static final String APP_ID = "863c7f94";
 

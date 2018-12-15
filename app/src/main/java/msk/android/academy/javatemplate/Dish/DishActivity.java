@@ -9,19 +9,25 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import msk.android.academy.javatemplate.DTO.RecipesDTO;
+import msk.android.academy.javatemplate.DTO.RecipesResponse;
 import msk.android.academy.javatemplate.Database.ProductEntity;
 import msk.android.academy.javatemplate.Database.RecipeDAO;
 import msk.android.academy.javatemplate.Database.RecipeDatabase;
 import msk.android.academy.javatemplate.Database.RecipeEntity;
+import msk.android.academy.javatemplate.NET.Network;
 import msk.android.academy.javatemplate.Product.ProductActivity;
 import msk.android.academy.javatemplate.R;
 
@@ -38,6 +44,7 @@ public class DishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         context = getBaseContext();
         db = RecipeDatabase.getAppDatabase(this);
+        loadRecipes("chicken");
         initViews();
         updateRecipe();
     }
@@ -70,6 +77,7 @@ public class DishActivity extends AppCompatActivity {
 
     public Single<List<RecipeEntity>> getRecipe() {
         db = RecipeDatabase.getAppDatabase(this);
+        Log.d(LOG,"getRecipe");
         return db.recipeDAO().getAll();
     }
 
@@ -105,6 +113,7 @@ public class DishActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::showDishes, this::visibleError);
         compositeDisposable.add(newsRoomDisposable);
+        Log.d(LOG,"update news");
     }
 
     private List<Dish> daoToNews(List<RecipeEntity> recipes) {
@@ -117,6 +126,43 @@ public class DishActivity extends AppCompatActivity {
     }
     private void visibleError(Throwable th) {
         Log.e(LOG, th.getMessage(), th);
+    }
+
+
+    private void loadRecipes(@NonNull String search) {
+
+        final Disposable searchDisposable = Network.getInstance()
+                .recipes()
+                .search(search)
+                .map(this::toDAO)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::saveRecipes, this::handleError);
+        compositeDisposable.add(searchDisposable);
+    }
+
+    private void handleError(Throwable throwable) {
+        if (throwable instanceof IOException) {
+            Toast.makeText(this, "ERROR: Check your internet connection", Toast.LENGTH_LONG);
+            return;
+        }
+    }
+
+
+    private RecipeEntity[] toDAO(@NonNull RecipesResponse response) {
+        List<RecipesDTO> listdto = response.getData();
+        List<RecipeEntity> recipes = new ArrayList<RecipeEntity>();
+        int i = 0;
+        for (RecipesDTO x : listdto) {
+            RecipeEntity item = new RecipeEntity(x.getLabel(), x.getImg(), x.getYield(),x.getUrl());
+            recipes.add(item);
+        }
+        return recipes.toArray(new RecipeEntity[recipes.size()]);
+    }
+
+    public void saveRecipes(RecipeEntity[] recipes) {
+        db.recipeDAO().deleteAll();
+        db.recipeDAO().insertAll(recipes);
     }
 
 }
