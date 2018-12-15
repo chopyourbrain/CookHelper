@@ -39,5 +39,4 @@ public class RecipesDTO {
     public String getUrl() {
         return url;
     }
-
 }
