@@ -8,5 +8,5 @@
     android:id="@+id/recycler_second"
     android:padding="8dp"
     android:clipToPadding="false"
-    tools:context=".recipes"
+    tools:context=".Dish.DishActivity"
     tools:listitem="@layout/item_rec_sec"/>

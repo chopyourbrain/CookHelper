@@ -38,7 +38,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.item_news, parent, false), clickListener);
+        return new ViewHolder(inflater.inflate(R.layout.activity_recipes, parent, false), clickListener);
     }
 
     @Override
@@ -73,10 +73,10 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
                 }
             });
 
-            imageView = itemView.findViewById(R.id.image_news);
-            nameView = itemView.findViewById(R.id.name_news);
-            timeView = itemView.findViewById(R.id.title_news);
-            personsView = itemView.findViewById(R.id.preview_news);
+            imageView = itemView.findViewById(R.id.image_recept);
+            nameView = itemView.findViewById(R.id.item_recept);
+            timeView = itemView.findViewById(R.id.time);
+            personsView = itemView.findViewById(R.id.item_yield);
         }
     }
 

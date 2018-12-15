@@ -40,9 +40,9 @@ public class RecipesDTO {
         return url;
     }
 
-    public RecipesItem convertToItems() {
+    /*public RecipesItem convertToItems() {
         RecipesItem item=new RecipesItem(this.getLabel(),this.getUrl());
 
         return item;
-    }
+    } */
 }
