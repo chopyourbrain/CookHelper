@@ -9,6 +9,7 @@ public class RecipesResponse {
 
     @Nullable
     public List<RecipesDTO> getData() {
+        //results.forEach(item -> );
         return results;
     }
 }

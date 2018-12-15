@@ -9,17 +9,22 @@ import okhttp3.Response;
 
 public final class ApiKeyInterceptor implements Interceptor {
 
-    private static final String PARAM_API_KEY = "api-key";
+    private final String APP_KEY_PARAM = "app_key";
+    private String APP_KEY;
 
-    private final String apiKey;
+    private final String APP_ID_PARAM = "app_id";
+    private String APP_ID;
 
-    private ApiKeyInterceptor(String apiKey) {
-        this.apiKey = apiKey;
+    final String APP_INGREDIENTS_PARAM = "q";
+
+    private ApiKeyInterceptor(String apiId,String apiKey) {
+        this.APP_KEY = apiKey;
+        this.APP_ID = apiId;
     }
 
 
-    public static Interceptor create(String apiKey) {
-        return new ApiKeyInterceptor(apiKey);
+    public static Interceptor create(String apiId,String apiKey) {
+        return new ApiKeyInterceptor(apiId,apiKey);
     }
 
 
@@ -29,7 +34,8 @@ public final class ApiKeyInterceptor implements Interceptor {
 
         final HttpUrl url = requestWithoutApiKey.url()
                 .newBuilder()
-                .addQueryParameter(PARAM_API_KEY, apiKey)
+                .addQueryParameter(APP_ID_PARAM, APP_ID)
+                .addQueryParameter(APP_KEY_PARAM, APP_KEY)
                 .build();
 
         final Request requestWithAttachedApiKey = requestWithoutApiKey.newBuilder()

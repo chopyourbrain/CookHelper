@@ -8,7 +8,7 @@ import retrofit2.http.Path;
 
 public interface EndPoint {
 
-    @GET("{recipe}.json")
-    Single<RecipesResponse> search(@Path("recipe") String category);
+    @GET("q={recipe}")
+    Single<RecipesResponse> search(@Path("recipe") String recipe);
 
 }
