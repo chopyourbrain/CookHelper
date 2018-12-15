@@ -8,15 +8,6 @@ public class Dish {
     private int id;
     private String name;
     private String url;
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     private String imageUrl;
     private int persons;
     private String time;
@@ -36,6 +27,14 @@ public class Dish {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public int getPersons() {

@@ -1,6 +1,8 @@
 package msk.android.academy.javatemplate.Dish;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,7 @@ import java.util.List;
 
 import msk.android.academy.javatemplate.R;
 
-public class DishAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder> {
+public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
     private final List<Dish> dishes;
     private final OnItemClickListener clickListener;
     private static final String LOG = "My_Log";
@@ -41,28 +43,24 @@ public class DishAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        NewsItem news = newsItemList.get(position);
+        Dish dish = dishes.get(position);
 
-        // Fill views with our data
-        holder.nameView.setText(news.getCategory());
-        holder.titleView.setText(news.getTitle());
-        holder.previewView.setText(news.getPreviewText());
-        holder.dateView.setText(news.getPublishDate() + "");
+        holder.nameView.setText(dish.getName());
+        holder.timeView.setText(dish.getTime());
+        holder.personsView.setText(dish.getPersons());
 
-        Glide.with(context).load(news.getImageUrl()).into(holder.imageView);
+        Glide.with(context).load(dish.getImageUrl()).into(holder.imageView);
     }
 
     public interface OnItemClickListener {
-        void onItemClick(NewsItem newsItem);
+        void onItemClick(Dish dish);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imageView;
         private final TextView nameView;
-        private final TextView titleView;
-        private final TextView previewView;
-        private final TextView dateView;
-
+        private final TextView timeView;
+        private final TextView personsView;
 
         private ViewHolder(View itemView, @Nullable OnItemClickListener listener) {
             super(itemView);
@@ -71,15 +69,14 @@ public class DishAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.ViewHo
             {
                 int position = getAdapterPosition();
                 if (listener != null && position != RecyclerView.NO_POSITION) {
-                    listener.onItemClick(newsItemList.get(position));
+                    listener.onItemClick(dishes.get(position));
                 }
             });
 
             imageView = itemView.findViewById(R.id.image_news);
             nameView = itemView.findViewById(R.id.name_news);
-            titleView = itemView.findViewById(R.id.title_news);
-            previewView = itemView.findViewById(R.id.preview_news);
-            dateView = itemView.findViewById(R.id.date_news);
+            timeView = itemView.findViewById(R.id.title_news);
+            personsView = itemView.findViewById(R.id.preview_news);
         }
     }
 
