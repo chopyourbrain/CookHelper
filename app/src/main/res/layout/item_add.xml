@@ -78,7 +78,7 @@
             app:layout_constraintStart_toEndOf="@id/image_recept_add"
             tools:text="@tools:sample/date/hhmm" />
 
-        <android.support.design.button.MaterialButton
+        <Button
             android:id="@+id/materialButton"
             android:layout_width="@dimen/image_rec"
             android:layout_height="@dimen/image_rec"
@@ -88,7 +88,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/item_yield_add"
             android:theme="@style/PrimaryFlatButton"
-            app:icon="@drawable/ic_checked"
+            android:background="@drawable/ic_checked"
             tools:ignore="MissingConstraints" />
     </android.support.constraint.ConstraintLayout>
 
