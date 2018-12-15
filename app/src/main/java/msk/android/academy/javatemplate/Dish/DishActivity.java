@@ -10,12 +10,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import msk.android.academy.javatemplate.Database.ProductEntity;
+import msk.android.academy.javatemplate.Database.RecipeDAO;
+import msk.android.academy.javatemplate.Database.RecipeDatabase;
 import msk.android.academy.javatemplate.Database.RecipeEntity;
 import msk.android.academy.javatemplate.Product.ProductActivity;
 import msk.android.academy.javatemplate.R;
@@ -23,21 +28,24 @@ import msk.android.academy.javatemplate.R;
 public class DishActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     Context context;
-    CompositeDisposable compositeDisposable=new CompositeDisposable();
-    String LOG ="Constructor recycler adapter";
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+    String LOG = "My_Log";
+    private RecipeDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
-        context=getBaseContext();
-        updateRecipe();
+        context = getBaseContext();
+        db = RecipeDatabase.getAppDatabase(this);
         initViews();
+        updateRecipe();
     }
+
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(LOG,"OnStop");
+        Log.d(LOG, "OnStop");
         //  compositeDisposable.dispose();
     }
 
@@ -54,11 +62,16 @@ public class DishActivity extends AppCompatActivity {
 
     private final DishAdapter.OnItemClickListener clickListener = dish ->
     {
-      //  listener.onNewsDetailsClicked(news.getUrl());
+        //  listener.onNewsDetailsClicked(news.getUrl());
         Intent productActivityIntent = new Intent(this, ProductActivity.class);
         productActivityIntent.putExtra("url", dish.getUrl());
         startActivity(productActivityIntent);
     };
+
+    public Single<List<RecipeEntity>> getRecipe() {
+        db = RecipeDatabase.getAppDatabase(this);
+        return db.recipeDAO().getAll();
+    }
 
     public void showDishes(List<Dish> dishes) {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -80,17 +93,30 @@ public class DishActivity extends AppCompatActivity {
             recyclerView.addItemDecoration(dividerItemDecoration);
         }*/
     }
-    private void initViews()
-    {
-        recyclerView=findViewById(R.id.recycler_second);
+
+    private void initViews() {
+        recyclerView = findViewById(R.id.recycler_second);
     }
+
     public void updateRecipe() {
-        final Disposable newsRoomDisposable = getNews()
+        final Disposable newsRoomDisposable = getRecipe()
                 .map(this::daoToNews)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::showNews, this::visibleError);
+                .subscribe(this::showDishes, this::visibleError);
         compositeDisposable.add(newsRoomDisposable);
+    }
+
+    private List<Dish> daoToNews(List<RecipeEntity> recipes) {
+        Log.d(LOG, "get " + recipes.size() + " news");
+        List<Dish> dishes = new ArrayList<>();
+        for (RecipeEntity x : recipes) {
+            dishes.add(new Dish(x.getId(),x.getLable(), x.getUrl(), x.getYield(), x.getImage()));
+        }
+        return dishes;
+    }
+    private void visibleError(Throwable th) {
+        Log.e(LOG, th.getMessage(), th);
     }
 
 }
