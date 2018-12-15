@@ -1,4 +1,4 @@
-package msk.android.academy.javatemplate;
+package msk.android.academy.javatemplate.Product;
 
 public class Product {
     private int id;

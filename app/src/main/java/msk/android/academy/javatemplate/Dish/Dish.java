@@ -2,7 +2,7 @@ package msk.android.academy.javatemplate.Dish;
 
 import java.util.List;
 
-import msk.android.academy.javatemplate.Product;
+import msk.android.academy.javatemplate.Product.Product;
 
 public class Dish {
     private int id;
