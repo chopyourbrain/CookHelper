@@ -4,10 +4,17 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import msk.android.academy.javatemplate.DTO.RecipesDTO;
+
 @android.arch.persistence.room.Entity(tableName = "recipes")
 public class RecipeEntity {
 
-    public RecipeEntity(){}
+    public RecipeEntity(String lable, String image, int yield, String url){
+        this.image = image;
+        this.lable = lable;
+        this.yield = yield;
+        this.url = url;
+    }
 
     @NonNull
     public int getId() {
@@ -67,7 +74,10 @@ public class RecipeEntity {
     @ColumnInfo(name = "url")
     private String url;
 
-
+    public RecipeEntity convert(RecipesDTO dto) {
+        RecipeEntity item = new RecipeEntity(dto.getLabel(), dto.getImg(), dto.getYield(),dto.getUrl());
+        return item;
+    }
 
 
 }
