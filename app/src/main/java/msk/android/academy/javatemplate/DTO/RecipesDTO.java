@@ -39,10 +39,4 @@ public class RecipesDTO {
     public String getUrl() {
         return url;
     }
-
-    /*public RecipesItem convertToItems() {
-        RecipesItem item=new RecipesItem(this.getLabel(),this.getUrl());
-
-        return item;
-    } */
 }

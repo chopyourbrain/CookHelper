@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         final List<RecipesDTO> data = response.getData();
 
 
+
         // mAdapter = new CustomAdapter(getApplicationContext(), data, clickListener);
         //recyclerView.setAdapter(mAdapter);
 
