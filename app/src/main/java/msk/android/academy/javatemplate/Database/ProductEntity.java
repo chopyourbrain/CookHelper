@@ -7,7 +7,13 @@ import android.support.annotation.NonNull;
 @android.arch.persistence.room.Entity(tableName = "products")
 public class ProductEntity {
 
-    public ProductEntity(){}
+    public ProductEntity(String name, String recipe_id, float count, float balance, boolean cheched){
+        this.name = name;
+        this.recipe_id = recipe_id;
+        this.count = count;
+        this.balance = balance;
+        this.cheched = cheched;
+    }
 
     @NonNull
     public int getId() {
@@ -26,15 +32,15 @@ public class ProductEntity {
         this.name = name;
     }
 
-    public int getRecipe_id() {
+    public String getRecipe_id() {
         return recipe_id;
     }
 
-    public void setRecipe_id(int recipe_id) {
+    public void setRecipe_id(String recipe_id) {
         this.recipe_id = recipe_id;
     }
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "id")
     private int id;
@@ -43,7 +49,7 @@ public class ProductEntity {
     private String name;
 
     @ColumnInfo(name = "recipe_id")
-    private int recipe_id;
+    private String recipe_id;
 
     public float getCount() {
         return count;
