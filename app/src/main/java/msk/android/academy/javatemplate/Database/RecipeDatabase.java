@@ -22,7 +22,7 @@ public abstract class RecipeDatabase extends RoomDatabase {
                     singleton = Room.databaseBuilder(context.getApplicationContext(),
                             RecipeDatabase.class,
                             DATABASE_NAME)
-                            //.allowMainThreadQueries()
+                            .allowMainThreadQueries()
                             .build();
                 }
             }
