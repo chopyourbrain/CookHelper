@@ -27,6 +27,7 @@
         <activity android:name=".Dish.DishActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
+        <activity android:name=".Product.ProductActivity"></activity>
     </application>
 
 </manifest>
