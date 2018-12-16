@@ -4,7 +4,7 @@
     <dimen name="marg_top">4dp</dimen>
     <dimen name="marg_end_bott">8dp</dimen>
     <dimen name="image">100dp</dimen>
-    <dimen name="image_rec">60dp</dimen>
+    <dimen name="image_rec">40dp</dimen>
     <dimen name="text_size_title">20sp</dimen>
     <dimen name="text_size_notitle">14sp</dimen>
     <dimen name="text_size_time">12sp</dimen>
