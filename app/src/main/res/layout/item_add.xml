@@ -94,7 +94,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/item_yield_add"
             android:theme="@style/PrimaryFlatButton"
-            android:textSize="0dp"
+            android:textSize="0sp"
             android:background="@drawable/ic_checked"
             tools:ignore="MissingConstraints" />
     </android.support.constraint.ConstraintLayout>
