@@ -9,6 +9,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -51,6 +52,25 @@ public class NewDishActivity extends AppCompatActivity {
         initViews();
         updateRecipe();
         loadRecipes("chicken");
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        SearchView searchView = (SearchView) findViewById(R.id.search_add);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                loadRecipes(query);
+                updateRecipe();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //loadRecipes(newText);
+                // updateRecipe();
+                return false;
+            }
+        });
+
     }
 
     @Override
@@ -78,8 +98,6 @@ public class NewDishActivity extends AppCompatActivity {
             recyclerView.setAdapter(new NewDishAdapter(context, dishes, clickListener));
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);
-            recyclerView.addItemDecoration(dividerItemDecoration);
         } /*else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
             recyclerView.setAdapter(new DishAdapter(getContext(), news, clickListener));
