@@ -84,6 +84,7 @@
             android:scaleType="centerCrop"
             android:theme="@style/PrimaryFlatButton"
             android:visibility="visible"
+            android:textSize="0sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/item_yield_add"
             tools:ignore="MissingConstraints" />

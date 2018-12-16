@@ -11,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,6 +118,7 @@ public class DishActivity extends AppCompatActivity {
         {
             Intent intent = new Intent(this, NewDishActivity.class);
             startActivity(intent);
+            Animatoo.animateShrink(this);
         });
     }
 
