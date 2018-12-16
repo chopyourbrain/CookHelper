@@ -36,7 +36,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public ProductAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ProductAdapter.ViewHolder(inflater.inflate(R.layout.item_rec_sec, parent, false));
+        return new ProductAdapter.ViewHolder(inflater.inflate(R.layout.item_products, parent, false));
     }
 
     @Override

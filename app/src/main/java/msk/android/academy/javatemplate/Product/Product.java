@@ -4,15 +4,33 @@ public class Product {
     private int id;
     private String name;
     private String weight;
-    private int idDish;
+    private String idDish;
+    private int balance;
     private boolean check;
 
-    public Product(int id, String name, String weight, int idDish) {
-        this.id = id;
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalanca(int balanca) {
+        this.balance = balanca;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    public Product(String name, String weight, String idDish) {
+
         this.name = name;
         this.weight = weight;
         this.idDish = idDish;
-        this.check=false;
+        this.check = false;
+        this.balance = 0;
     }
 
     public int getId() {
@@ -40,11 +58,11 @@ public class Product {
         this.weight = weight;
     }
 
-    public int getIdDish() {
+    public String getIdDish() {
         return idDish;
     }
 
-    public void setIdDish(int idDish) {
+    public void setIdDish(String idDish) {
         this.idDish = idDish;
     }
 }
