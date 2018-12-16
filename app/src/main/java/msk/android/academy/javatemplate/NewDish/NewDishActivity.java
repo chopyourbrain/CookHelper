@@ -21,6 +21,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import msk.android.academy.javatemplate.DTO.HitsDTO;
 import msk.android.academy.javatemplate.DTO.RecipesDTO;
 import msk.android.academy.javatemplate.DTO.RecipesResponse;
 import msk.android.academy.javatemplate.Database.RecipeDatabase;
@@ -138,13 +139,12 @@ public class NewDishActivity extends AppCompatActivity {
 
 
     private RecipeEntity[] toDAO(@NonNull RecipesResponse response) {
-        Log.d(LOG,"toDAO");
-        List<RecipesDTO> listdto = response.getData();
-        Log.d(LOG,"download "+listdto.size());
+        List<HitsDTO> listdto = response.getData();
         List<RecipeEntity> recipes = new ArrayList<RecipeEntity>();
-        int i = 0;
-        for (RecipesDTO x : listdto) {
-            RecipeEntity item = new RecipeEntity(x.getLabel(), x.getImg(), x.getYield(),x.getUrl());
+        Log.d("MYLOG","DAO");
+        Log.d("MYLOG",""+listdto.size());
+        for (HitsDTO x : listdto) {
+            RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl());
             recipes.add(item);
         }
         return recipes.toArray(new RecipeEntity[recipes.size()]);

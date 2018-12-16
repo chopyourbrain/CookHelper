@@ -41,7 +41,7 @@ public class NewDishAdapter extends RecyclerView.Adapter<NewDishAdapter.ViewHold
 
     @Override
     public NewDishAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NewDishAdapter.ViewHolder(inflater.inflate(R.layout.jghgg, parent, false), clickListener);
+        return new NewDishAdapter.ViewHolder(inflater.inflate(R.layout.activity_recipes, parent, false), clickListener);
     }
 
     @Override
@@ -72,8 +72,8 @@ public class NewDishAdapter extends RecyclerView.Adapter<NewDishAdapter.ViewHold
             imageView = itemView.findViewById(R.id.image_recept);
             nameView = itemView.findViewById(R.id.item_recept);
             timeView = itemView.findViewById(R.id.time);
-            personsView = itemView.findViewById(R.id.mkjk);
-            buttonAdd=itemView.findViewById(R.id.fsf);
+            personsView = itemView.findViewById(R.id.item_yield);
+            buttonAdd=itemView.findViewById(R.id.item_recept);
 
             buttonAdd.setOnClickListener(view ->
             {

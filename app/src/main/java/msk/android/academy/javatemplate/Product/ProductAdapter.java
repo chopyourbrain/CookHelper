@@ -17,7 +17,6 @@ import msk.android.academy.javatemplate.R;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private final List<Product> products;
-    private final ProductAdapter.OnItemClickListener clickListener;
     private static final String LOG = "My_Log";
     private Context context;
     private final LayoutInflater inflater;
@@ -37,7 +36,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public ProductAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ProductAdapter.ViewHolder(inflater.inflate(R.layout.item_rec_sec, parent, false), clickListener);
+        return new ProductAdapter.ViewHolder(inflater.inflate(R.layout.item_rec_sec, parent, false));
     }
 
     @Override
@@ -53,11 +52,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         private final TextView nameView;
         private final TextView countView;
 
-        private ViewHolder(View itemView, @Nullable ProductAdapter.OnItemClickListener listener) {
+        private ViewHolder(View itemView) {
             super(itemView);
 
-          //  nameView = itemView.findViewById(R.id.raf);
-         //   countView = itemView.findViewById(R.id.asd);
+            nameView = itemView.findViewById(R.id.item_recept);
+           countView = itemView.findViewById(R.id.item_yield);
         }
     }
 

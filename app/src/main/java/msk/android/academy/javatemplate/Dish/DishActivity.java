@@ -21,6 +21,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import msk.android.academy.javatemplate.DTO.HitsDTO;
 import msk.android.academy.javatemplate.DTO.RecipesDTO;
 import msk.android.academy.javatemplate.DTO.RecipesResponse;
 import msk.android.academy.javatemplate.Database.ProductEntity;
@@ -44,7 +45,7 @@ public class DishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         context = getBaseContext();
         db = RecipeDatabase.getAppDatabase(this);
-        loadRecipes("chicken");
+        loadRecipes("pork");
         initViews();
         updateRecipe();
     }
@@ -150,10 +151,10 @@ public class DishActivity extends AppCompatActivity {
 
 
     private RecipeEntity[] toDAO(@NonNull RecipesResponse response) {
-        List<RecipesDTO> listdto = response.getData();
+        List<HitsDTO> listdto = response.getData();
         List<RecipeEntity> recipes = new ArrayList<RecipeEntity>();
         Log.d("MYLOG","DAO");
-        Log.d("MYLOG",""+listdto.size());
+        Log.d("MYLOG","size: "+listdto.size());
         for (HitsDTO x : listdto) {
             RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl());
             recipes.add(item);
@@ -162,8 +163,10 @@ public class DishActivity extends AppCompatActivity {
     }
 
     public void saveRecipes(RecipeEntity[] recipes) {
+        Log.d(LOG, "save Recives");
         db.recipeDAO().deleteAll();
         db.recipeDAO().insertAll(recipes);
+        Log.d(LOG, "save " + recipes.length + " news to DB");
     }
 
 }
