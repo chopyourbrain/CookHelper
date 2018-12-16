@@ -1,8 +1,8 @@
 package msk.android.academy.javatemplate.DTO;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
-
-
 
 public class RecipesDTO {
     @SerializedName("label")
@@ -12,27 +12,30 @@ public class RecipesDTO {
     private String url;
 
     @SerializedName("image")
-    private String img;
+    private String image;
 
-    @SerializedName("ingredientLines")
-    private String[] ingr;
+    //@SerializedName("ingredientLines")
+    //private String[] ingr;
 
     @SerializedName("yield")
     private int yield;
 
-    public String getImg() {
-        return img;
+    public String getImage() {
+        return image;
     }
 
     public int getYield() {
+
+
         return yield;
     }
 
-    public String[] getIngr() {
-        return ingr;
-    }
+//    public String[] getIngr() {
+//        return ingr;
+//    }
 
     public String getLabel() {
+        //Log.d("MYLOG","Lable = "+label);
         return label;
     }
 

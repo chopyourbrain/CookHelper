@@ -1,15 +1,17 @@
 package msk.android.academy.javatemplate.DTO;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 import io.reactivex.annotations.Nullable;
 
 public class RecipesResponse {
-    private List<RecipesDTO> results;
+    private List<HitsDTO> hits;
 
     @Nullable
-    public List<RecipesDTO> getData() {
+    public List<HitsDTO> getData() {
         //results.forEach(item -> );
-        return results;
+        return hits;
     }
 }
