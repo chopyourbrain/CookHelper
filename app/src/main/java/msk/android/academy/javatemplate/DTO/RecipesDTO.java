@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class RecipesDTO {
     @SerializedName("label")
     private String label;
@@ -13,29 +15,36 @@ public class RecipesDTO {
 
     @SerializedName("image")
     private String image;
-
-    //@SerializedName("ingredientLines")
-    //private String[] ingr;
+//
+//    @SerializedName("ingredientLines")
+    private List<IngredientsDTO> ingredients;
 
     @SerializedName("yield")
     private int yield;
+
+    @SerializedName("totalTime")
+    private int time;
 
     public String getImage() {
         return image;
     }
 
+    public int getTime() {
+        return time;
+    }
+
     public int getYield() {
-
-
         return yield;
     }
 
-//    public String[] getIngr() {
+//    public String getIngr() {
+//        Log.d("MYLOG","ingr = "+ingr);
 //        return ingr;
 //    }
 
     public String getLabel() {
-        //Log.d("MYLOG","Lable = "+label);
+        Log.d("MYLOG","Lable = "+label);
+        Log.d("MYLOG","ingr = "+ingredients.get(0).getText());
         return label;
     }
 
