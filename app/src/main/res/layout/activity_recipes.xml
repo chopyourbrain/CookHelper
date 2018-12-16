@@ -10,15 +10,18 @@
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
+
+        android:paddingTop="@android:dimen/notification_large_icon_height"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_second"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <android.support.v7.widget.RecyclerView
-
         android:id="@+id/recycler_second"
         android:layout_width="match_parent"
-        android:layout_height="465dp"
+        android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:padding="@dimen/padding"
+        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search"
         tools:context=".recipes"
