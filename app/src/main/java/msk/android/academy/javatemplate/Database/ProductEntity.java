@@ -45,4 +45,38 @@ public class ProductEntity {
     @ColumnInfo(name = "recipe_id")
     private int recipe_id;
 
+    public float getCount() {
+        return count;
+    }
+
+    public void setCount(float count) {
+        this.count = count;
+    }
+
+    public float getBalance() {
+        return balance;
+    }
+
+    public void setBalance(float balance) {
+        this.balance = balance;
+    }
+
+    public boolean isCheched() {
+        return cheched;
+    }
+
+    public void setCheched(boolean cheched) {
+        this.cheched = cheched;
+    }
+
+    @ColumnInfo(name = "count")
+    private float count;
+
+    @ColumnInfo(name = "balance")
+    private float balance;
+
+    @ColumnInfo(name = "checked")
+    private boolean cheched;
+
+
 }
