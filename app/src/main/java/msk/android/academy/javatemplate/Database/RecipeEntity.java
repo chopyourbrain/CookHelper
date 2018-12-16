@@ -57,8 +57,8 @@ public class RecipeEntity {
         this.url = url;
     }
 
-    @PrimaryKey
-    @NonNull
+
+
     @ColumnInfo(name = "id")
     private int id;
 
@@ -71,6 +71,9 @@ public class RecipeEntity {
     @ColumnInfo(name = "yield")
     private int yield;
 
+
+    @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "url")
     private String url;
 

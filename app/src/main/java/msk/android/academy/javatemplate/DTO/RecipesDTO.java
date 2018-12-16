@@ -22,8 +22,15 @@ public class RecipesDTO {
     @SerializedName("yield")
     private int yield;
 
+    @SerializedName("totalTime")
+    private int time;
+
     public String getImage() {
         return image;
+    }
+
+    public int getTime() {
+        return time;
     }
 
     public int getYield() {
@@ -37,7 +44,7 @@ public class RecipesDTO {
 
     public String getLabel() {
         Log.d("MYLOG","Lable = "+label);
-        Log.d("MYLOG","ingr = "+ingredients.get(0).getData());
+        Log.d("MYLOG","ingr = "+ingredients.get(0).getText());
         return label;
     }
 

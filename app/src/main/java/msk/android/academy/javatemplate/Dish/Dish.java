@@ -18,7 +18,7 @@ public class Dish {
         this.name = name;
         this.persons = persons;
         this.url = url;
-        this.imageUrl=url;
+        this.imageUrl=imageUrl;
         //Достаем продукты
     }
 

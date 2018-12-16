@@ -45,9 +45,9 @@ public class DishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         context = getBaseContext();
         db = RecipeDatabase.getAppDatabase(this);
-        loadRecipes("pork");
         initViews();
         updateRecipe();
+        loadRecipes("pork");
     }
 
     @Override
