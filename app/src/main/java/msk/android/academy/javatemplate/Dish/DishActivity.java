@@ -2,7 +2,6 @@ package msk.android.academy.javatemplate.Dish;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -43,25 +42,29 @@ public class DishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         context = getBaseContext();
         db = RecipeDatabase.getAppDatabase(this);
-        initViews();
-        updateRecipe();
-        loadRecipes("pork");
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
         SearchView searchView = (SearchView) findViewById(R.id.search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 loadRecipes(query);
+                updateRecipe();
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                loadRecipes(newText);
+                //loadRecipes(newText);
+                // updateRecipe();
                 return false;
             }
         });
 
     }
+
 
     @Override
     protected void onStop() {
@@ -96,13 +99,12 @@ public class DishActivity extends AppCompatActivity {
     }
 
     public void showDishes(List<Dish> dishes) {
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView.setAdapter(new DishAdapter(context, dishes, clickListener));
+        //if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        recyclerView.setAdapter(new DishAdapter(getApplicationContext(), dishes, clickListener));
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);
-            recyclerView.addItemDecoration(dividerItemDecoration);
-        } /*else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        //}
+        /*else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
             recyclerView.setAdapter(new DishAdapter(getContext(), news, clickListener));
             if (MainActivity.isTwoPanel) {
@@ -153,6 +155,9 @@ Log.d(LOG,"load");
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::saveRecipes, this::handleError);
         compositeDisposable.add(searchDisposable);
+
+        initViews();
+        updateRecipe();
     }
 
     private void handleError(Throwable throwable) {
