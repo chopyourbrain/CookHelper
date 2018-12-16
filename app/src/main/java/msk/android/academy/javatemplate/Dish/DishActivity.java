@@ -131,7 +131,7 @@ public class DishActivity extends AppCompatActivity {
 
 
     private void loadRecipes(@NonNull String search) {
-        Log.d("MYLOG","LOAD");
+Log.d(LOG,"load");
         final Disposable searchDisposable = Network.getInstance()
                 .recipes()
                 .search(search)
@@ -164,11 +164,11 @@ public class DishActivity extends AppCompatActivity {
     }
 
     public void saveRecipes(RecipeEntity[] recipes) {
-        Log.d("MYLOG","DELETE");
+        Log.d(LOG, "save Recipes");
+
         db.recipeDAO().deleteAll();
-        Log.d("MYLOG","INSERT");
         db.recipeDAO().insertAll(recipes);
-        Log.d("MYLOG","saveRecipes");
+        Log.d(LOG, "save " + recipes.length + " news to DB");
     }
 
 }
