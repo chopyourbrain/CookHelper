@@ -9,6 +9,12 @@
     android:padding="@dimen/padding"
     android:elevation="@dimen/padding"
     android:orientation="vertical"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="0.0px"
+    android:clipToPadding="false"
+    android:clipChildren="false"
+    app:cardElevation="10dp"
+    app:cardPreventCornerOverlap="false"
     >
 
     <android.support.constraint.ConstraintLayout
@@ -88,6 +94,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/item_yield_add"
             android:theme="@style/PrimaryFlatButton"
+            android:textSize="0dp"
             android:background="@drawable/ic_checked"
             tools:ignore="MissingConstraints" />
     </android.support.constraint.ConstraintLayout>

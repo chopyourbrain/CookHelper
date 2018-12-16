@@ -9,6 +9,12 @@
     android:padding="@dimen/padding"
     android:elevation="@dimen/padding"
     android:orientation="vertical"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="0.0px"
+    android:clipToPadding="false"
+    android:clipChildren="false"
+    app:cardElevation="10dp"
+    app:cardPreventCornerOverlap="false"
     >
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
