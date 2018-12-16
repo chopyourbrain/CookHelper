@@ -144,7 +144,7 @@ public class NewDishActivity extends AppCompatActivity {
         Log.d("MYLOG","DAO");
         Log.d("MYLOG",""+listdto.size());
         for (HitsDTO x : listdto) {
-            RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl());
+            RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl(),x.getData().getTime());
             recipes.add(item);
         }
         return recipes.toArray(new RecipeEntity[recipes.size()]);
