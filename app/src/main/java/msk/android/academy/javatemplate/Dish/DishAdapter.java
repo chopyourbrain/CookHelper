@@ -50,6 +50,8 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
 
         holder.nameView.setText(dish.getName());
         holder.timeView.setText("Время приготовления"+dish.getTime());
+        if (dish.getTime().contains("0.0"))
+            holder.timeView.setVisibility(View.GONE);
         holder.personsView.setText("Количество персон: "+dish.getPersons());
 
         Glide.with(context).load(dish.getImageUrl()).into(holder.imageView);

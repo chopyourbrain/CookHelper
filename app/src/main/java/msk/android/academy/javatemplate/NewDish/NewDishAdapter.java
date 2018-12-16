@@ -50,6 +50,8 @@ public class NewDishAdapter extends RecyclerView.Adapter<NewDishAdapter.ViewHold
 
         holder.nameView.setText(dish.getName());
         holder.timeView.setText("Время приготовления" + dish.getTime());
+        if (dish.getTime().contains("0.0"))
+            holder.timeView.setVisibility(View.GONE);
         holder.personsView.setText("Количество персон: " + dish.getPersons());
 
         Glide.with(context).load(dish.getImageUrl()).into(holder.imageView);
@@ -65,6 +67,7 @@ public class NewDishAdapter extends RecyclerView.Adapter<NewDishAdapter.ViewHold
         private final TextView timeView;
         private final TextView personsView;
         private final Button buttonAdd;
+        private final Button buttonAdd2;
 
         private ViewHolder(View itemView, @Nullable DishAdapter.OnItemClickListener listener) {
             super(itemView);
@@ -74,9 +77,12 @@ public class NewDishAdapter extends RecyclerView.Adapter<NewDishAdapter.ViewHold
             timeView = itemView.findViewById(R.id.time_add);
             personsView = itemView.findViewById(R.id.item_yield_add);
             buttonAdd = itemView.findViewById(R.id.materialButton);
-
-            buttonAdd.setOnClickListener(view ->
+            buttonAdd2 = itemView.findViewById(R.id.materialButton2);
+            buttonAdd.setVisibility(View.GONE);
+            buttonAdd2.setOnClickListener(view ->
             {
+                buttonAdd.setVisibility(View.VISIBLE);
+                buttonAdd2.setVisibility(View.GONE);
                 int position = getAdapterPosition();
                 if (listener != null && position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(dishes.get(position));

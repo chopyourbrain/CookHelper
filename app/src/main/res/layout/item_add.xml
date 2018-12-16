@@ -84,6 +84,21 @@
             android:scaleType="centerCrop"
             android:theme="@style/PrimaryFlatButton"
             android:visibility="visible"
+            android:textSize="0sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/item_yield_add"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/materialButton2"
+            android:layout_width="@dimen/image_rec"
+            android:layout_height="@dimen/image_rec"
+            android:layout_marginTop="@dimen/marg_top"
+            android:layout_marginEnd="@dimen/marg_end_bott"
+            android:background="@drawable/ic_add"
+            android:scaleType="centerCrop"
+            android:theme="@style/PrimaryFlatButton"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/item_yield_add"
             tools:ignore="MissingConstraints" />

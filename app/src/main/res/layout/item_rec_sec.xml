@@ -86,8 +86,8 @@
 
         <Button
             android:id="@+id/button_delete"
-            android:layout_width="@dimen/image_rec"
-            android:layout_height="@dimen/image_rec"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginTop="@dimen/marg_top"
             android:layout_marginEnd="@dimen/marg_end_bott"
             android:background="@drawable/ic_ui"
