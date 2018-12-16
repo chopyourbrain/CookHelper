@@ -75,7 +75,7 @@ public class DishActivity extends AppCompatActivity {
         startActivity(productActivityIntent);
     };
 
-    public Single<List<RecipeEntity>> getRecipes() {
+    public Single<List<RecipeEntity>> getRecipe() {
         db = RecipeDatabase.getAppDatabase(this);
         Log.d(LOG,"getRecipe");
         return db.recipeDAO().getAll();
@@ -107,17 +107,17 @@ public class DishActivity extends AppCompatActivity {
     }
 
     public void updateRecipe() {
-        final Disposable dishRoomDisposable = getRecipes()
-                .map(this::daoToDishes)
+        final Disposable newsRoomDisposable = getRecipe()
+                .map(this::daoToNews)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::showDishes, this::visibleError);
-        compositeDisposable.add(dishRoomDisposable);
-        Log.d(LOG,"update dish");
+        compositeDisposable.add(newsRoomDisposable);
+        Log.d(LOG,"update news");
     }
 
-    private List<Dish> daoToDishes(List<RecipeEntity> recipes) {
-        Log.d(LOG, "get " + recipes.size() + " recipes");
+    private List<Dish> daoToNews(List<RecipeEntity> recipes) {
+        Log.d(LOG, "get " + recipes.size() + " news");
         List<Dish> dishes = new ArrayList<>();
         for (RecipeEntity x : recipes) {
             dishes.add(new Dish(x.getId(),x.getLable(), x.getUrl(), x.getYield(), x.getImage()));
@@ -150,13 +150,12 @@ public class DishActivity extends AppCompatActivity {
 
 
     private RecipeEntity[] toDAO(@NonNull RecipesResponse response) {
-        Log.d(LOG,"toDAO");
         List<RecipesDTO> listdto = response.getData();
-        Log.d(LOG,"download "+listdto.size());
         List<RecipeEntity> recipes = new ArrayList<RecipeEntity>();
-        int i = 0;
-        for (RecipesDTO x : listdto) {
-            RecipeEntity item = new RecipeEntity(x.getLabel(), x.getImg(), x.getYield(),x.getUrl());
+        Log.d("MYLOG","DAO");
+        Log.d("MYLOG",""+listdto.size());
+        for (HitsDTO x : listdto) {
+            RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl());
             recipes.add(item);
         }
         return recipes.toArray(new RecipeEntity[recipes.size()]);

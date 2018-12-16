@@ -75,7 +75,7 @@ public class RecipeEntity {
     private String url;
 
     public RecipeEntity convert(RecipesDTO dto) {
-        RecipeEntity item = new RecipeEntity(dto.getLabel(), dto.getImg(), dto.getYield(),dto.getUrl());
+        RecipeEntity item = new RecipeEntity(dto.getLabel(), dto.getImage(), dto.getYield(),dto.getUrl());
         return item;
     }
 
