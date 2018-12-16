@@ -10,10 +10,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.SearchView;
-import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,17 +21,10 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import msk.android.academy.javatemplate.DTO.HitsDTO;
-import msk.android.academy.javatemplate.DTO.IngredientsDTO;
-import msk.android.academy.javatemplate.DTO.RecipesDTO;
 import msk.android.academy.javatemplate.DTO.RecipesResponse;
-import msk.android.academy.javatemplate.Database.ProductEntity;
-import msk.android.academy.javatemplate.Database.RecipeDAO;
-import msk.android.academy.javatemplate.Database.RecipeDatabase;
 import msk.android.academy.javatemplate.Database.RecipeDatabase2;
 import msk.android.academy.javatemplate.Database.RecipeEntity;
-import msk.android.academy.javatemplate.NET.Network;
 import msk.android.academy.javatemplate.NewDish.NewDishActivity;
-import msk.android.academy.javatemplate.Product.ProductActivity;
 import msk.android.academy.javatemplate.R;
 import msk.android.academy.javatemplate.RecipeDetailsActivity;
 

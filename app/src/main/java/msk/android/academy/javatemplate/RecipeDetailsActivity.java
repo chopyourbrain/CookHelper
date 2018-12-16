@@ -1,18 +1,16 @@
 package msk.android.academy.javatemplate;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-
-import msk.android.academy.javatemplate.Database.RecipeDatabase;
+import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 public class RecipeDetailsActivity extends AppCompatActivity {
     String url;
     String LOG="My_Log";
-    RecipeDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,15 +18,17 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_recipe_details);
-        url = getIntent().getStringExtra("url");
-        Log.d(LOG, url);
 
-        db = RecipeDatabase.getAppDatabase(this);
-
-
-        WebView webView = findViewById (R.id.web_view);
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webView.loadUrl(url);
+        WebView web = (WebView) findViewById(R.id.web);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        web.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+        web.loadUrl(getIntent().getStringExtra("url"));
     }
 }
