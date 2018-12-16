@@ -5,12 +5,14 @@ public class Product {
     private String name;
     private String weight;
     private int idDish;
+    private boolean check;
 
     public Product(int id, String name, String weight, int idDish) {
         this.id = id;
         this.name = name;
         this.weight = weight;
         this.idDish = idDish;
+        this.check=false;
     }
 
     public int getId() {

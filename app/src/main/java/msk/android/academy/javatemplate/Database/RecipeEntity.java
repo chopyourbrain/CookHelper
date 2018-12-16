@@ -3,6 +3,7 @@ package msk.android.academy.javatemplate.Database;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import msk.android.academy.javatemplate.DTO.RecipesDTO;
 
@@ -57,8 +58,8 @@ public class RecipeEntity {
         this.url = url;
     }
 
-    @PrimaryKey
-    @NonNull
+
+
     @ColumnInfo(name = "id")
     private int id;
 
@@ -71,6 +72,9 @@ public class RecipeEntity {
     @ColumnInfo(name = "yield")
     private int yield;
 
+
+    @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "url")
     private String url;
 
