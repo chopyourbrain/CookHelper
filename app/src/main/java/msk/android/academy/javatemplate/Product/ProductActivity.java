@@ -2,6 +2,7 @@ package msk.android.academy.javatemplate.Product;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,7 @@ import msk.android.academy.javatemplate.Dish.Dish;
 import msk.android.academy.javatemplate.Dish.DishAdapter;
 import msk.android.academy.javatemplate.NET.Network;
 import msk.android.academy.javatemplate.R;
+import msk.android.academy.javatemplate.RecipeDetailsActivity;
 
 public class ProductActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -54,9 +56,15 @@ public class ProductActivity extends AppCompatActivity {
         Log.d(LOG, "OnStop");
         //  compositeDisposable.dispose();
     }
+    private final ProductAdapter.OnItemClickListener clickListener = product ->
+    {
+        //  listener.onNewsDetailsClicked(news.getUrl());
+        db.productDAO().checkById(product.getName(),product.getCheck());
+
+    };
     public void showProducts(List<Product> products) {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView.setAdapter(new ProductAdapter(context, products));
+            recyclerView.setAdapter(new ProductAdapter(context, products, clickListener));
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);

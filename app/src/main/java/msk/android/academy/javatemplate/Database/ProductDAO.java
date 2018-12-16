@@ -34,4 +34,7 @@ public interface ProductDAO {
 
     @Query("DELETE FROM products WHERE recipe_id = :id")
     void deleteById(String id);
+
+   @Query( "UPDATE products SET checked = :fl WHERE name = :id")
+    void checkById(String id, boolean fl);
 }

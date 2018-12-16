@@ -16,7 +16,7 @@ public class Product {
         this.balance = balanca;
     }
 
-    public boolean isCheck() {
+    public boolean getCheck() {
         return check;
     }
 
