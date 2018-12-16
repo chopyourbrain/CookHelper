@@ -25,17 +25,17 @@ public class RecipesDTO {
     }
 
     public int getYield() {
-
-
         return yield;
     }
 
 //    public String[] getIngr() {
+//        Log.d("MYLOG","ingr = "+ingr);
 //        return ingr;
 //    }
 
     public String getLabel() {
-        //Log.d("MYLOG","Lable = "+label);
+        Log.d("MYLOG","Lable = "+label);
+//        Log.d("MYLOG","ingr = "+ingr);
         return label;
     }
 

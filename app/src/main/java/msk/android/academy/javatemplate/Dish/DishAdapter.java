@@ -38,7 +38,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.activity_recipes, parent, false), clickListener);
+        return new ViewHolder(inflater.inflate(R.layout.item_rec_sec, parent, false), clickListener);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
         Dish dish = dishes.get(position);
 
         holder.nameView.setText(dish.getName());
-        holder.timeView.setText(dish.getTime());
-        holder.personsView.setText(dish.getPersons());
+        holder.timeView.setText("Время приготовления"+dish.getTime());
+        holder.personsView.setText("Количество персон: "+dish.getPersons());
 
         Glide.with(context).load(dish.getImageUrl()).into(holder.imageView);
     }
