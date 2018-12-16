@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         List<RecipeEntity> recipes = new ArrayList<RecipeEntity>();
 
         for (HitsDTO x : listdto) {
-            RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl(),x.getData().getTime());
+            RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl());
             recipes.add(item);
         }
         Log.d("MYLOG","toDAO finish");
