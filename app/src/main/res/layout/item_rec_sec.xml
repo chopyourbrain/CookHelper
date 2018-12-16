@@ -67,7 +67,7 @@
             android:gravity="center_vertical"
             android:maxLines="2"
             android:textSize="@dimen/text_size_notitle"
-            app:layout_constraintEnd_toStartOf="@+id/materialButton"
+            app:layout_constraintEnd_toStartOf="@+id/button_delete"
             app:layout_constraintStart_toEndOf="@id/image_recept"
             app:layout_constraintTop_toBottomOf="@id/item_recept"
             tools:text="@tools:sample/full_names" />
