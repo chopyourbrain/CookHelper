@@ -75,7 +75,7 @@ public class DishActivity extends AppCompatActivity {
         startActivity(productActivityIntent);
     };
 
-    public Single<List<RecipeEntity>> getRecipe() {
+    public Single<List<RecipeEntity>> getRecipes() {
         db = RecipeDatabase.getAppDatabase(this);
         Log.d(LOG,"getRecipe");
         return db.recipeDAO().getAll();
@@ -107,17 +107,17 @@ public class DishActivity extends AppCompatActivity {
     }
 
     public void updateRecipe() {
-        final Disposable newsRoomDisposable = getRecipe()
-                .map(this::daoToNews)
+        final Disposable dishRoomDisposable = getRecipes()
+                .map(this::daoToDishes)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::showDishes, this::visibleError);
-        compositeDisposable.add(newsRoomDisposable);
-        Log.d(LOG,"update news");
+        compositeDisposable.add(dishRoomDisposable);
+        Log.d(LOG,"update dish");
     }
 
-    private List<Dish> daoToNews(List<RecipeEntity> recipes) {
-        Log.d(LOG, "get " + recipes.size() + " news");
+    private List<Dish> daoToDishes(List<RecipeEntity> recipes) {
+        Log.d(LOG, "get " + recipes.size() + " recipes");
         List<Dish> dishes = new ArrayList<>();
         for (RecipeEntity x : recipes) {
             dishes.add(new Dish(x.getId(),x.getLable(), x.getUrl(), x.getYield(), x.getImage()));
@@ -150,7 +150,9 @@ public class DishActivity extends AppCompatActivity {
 
 
     private RecipeEntity[] toDAO(@NonNull RecipesResponse response) {
+        Log.d(LOG,"toDAO");
         List<RecipesDTO> listdto = response.getData();
+        Log.d(LOG,"download "+listdto.size());
         List<RecipeEntity> recipes = new ArrayList<RecipeEntity>();
         int i = 0;
         for (RecipesDTO x : listdto) {
