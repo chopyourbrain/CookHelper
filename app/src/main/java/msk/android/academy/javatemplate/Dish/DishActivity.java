@@ -9,6 +9,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -22,10 +23,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import msk.android.academy.javatemplate.DTO.HitsDTO;
-import msk.android.academy.javatemplate.DTO.RecipesDTO;
 import msk.android.academy.javatemplate.DTO.RecipesResponse;
-import msk.android.academy.javatemplate.Database.ProductEntity;
-import msk.android.academy.javatemplate.Database.RecipeDAO;
 import msk.android.academy.javatemplate.Database.RecipeDatabase;
 import msk.android.academy.javatemplate.Database.RecipeEntity;
 import msk.android.academy.javatemplate.NET.Network;
@@ -48,6 +46,21 @@ public class DishActivity extends AppCompatActivity {
         initViews();
         updateRecipe();
         loadRecipes("pork");
+        SearchView searchView = (SearchView) findViewById(R.id.search);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                loadRecipes(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                loadRecipes(newText);
+                return false;
+            }
+        });
+
     }
 
     @Override
