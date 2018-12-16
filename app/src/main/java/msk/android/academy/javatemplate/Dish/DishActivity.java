@@ -80,6 +80,7 @@ public class DishActivity extends AppCompatActivity {
     {
         //  listener.onNewsDetailsClicked(news.getUrl());
         db.recipeDAO().delete(dish.getUrl());
+        db.productDAO().deleteById(dish.getUrl());
         updateRecipe();
     };
 
