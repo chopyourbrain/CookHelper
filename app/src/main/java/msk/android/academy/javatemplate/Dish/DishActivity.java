@@ -22,6 +22,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import msk.android.academy.javatemplate.DTO.HitsDTO;
+import msk.android.academy.javatemplate.DTO.IngredientsDTO;
 import msk.android.academy.javatemplate.DTO.RecipesDTO;
 import msk.android.academy.javatemplate.DTO.RecipesResponse;
 import msk.android.academy.javatemplate.Database.ProductEntity;
@@ -153,12 +154,19 @@ Log.d(LOG,"load");
     private RecipeEntity[] toDAO(@NonNull RecipesResponse response) {
         List<HitsDTO> listdto = response.getData();
         List<RecipeEntity> recipes = new ArrayList<RecipeEntity>();
+        List<ProductEntity> products = new ArrayList<ProductEntity>();
+        List<IngredientsDTO> ingredients = new ArrayList<IngredientsDTO>();
         Log.d("MYLOG","DAO");
-        Log.d("MYLOG",""+listdto.size());
+        Log.d("MYLOG","size: "+listdto.size());
         for (HitsDTO x : listdto) {
             RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl());
             recipes.add(item);
+            for (IngredientsDTO y : x.getData().getIngredients()) {
+                ProductEntity productEntity = new ProductEntity(y.getText(), x.getData().getUrl(), y.getWeight(), y.getWeight(), false);
+                products.add(productEntity);
+            }
         }
+        saveIngridients(products.toArray(new ProductEntity[products.size()]));
         Log.d("MYLOG","DAO finish");
         return recipes.toArray(new RecipeEntity[recipes.size()]);
     }
@@ -168,6 +176,14 @@ Log.d(LOG,"load");
 
         db.recipeDAO().deleteAll();
         db.recipeDAO().insertAll(recipes);
+        Log.d(LOG, "save " + recipes.length + " news to DB");
+    }
+
+    public void saveIngridients(ProductEntity[] recipes) {
+        Log.d(LOG, "save Recipes2");
+
+        db.productDAO().deleteAll();
+        db.productDAO().insertAll(recipes);
         Log.d(LOG, "save " + recipes.length + " news to DB");
     }
 
