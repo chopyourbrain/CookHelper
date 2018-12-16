@@ -148,7 +148,7 @@ public class DishActivity extends AppCompatActivity {
         Log.d(LOG, "get " + recipes.size() + " news");
         List<Dish> dishes = new ArrayList<>();
         for (RecipeEntity x : recipes) {
-            dishes.add(new Dish(x.getId(),x.getLable(), x.getUrl(), x.getYield(), x.getImage()));
+            dishes.add(new Dish(x.getId(),x.getLable(), x.getUrl(), x.getYield(), x.getImage(), x.getTime()));
         }
         return dishes;
     }
@@ -166,7 +166,7 @@ public class DishActivity extends AppCompatActivity {
         Log.d("MYLOG","DAO");
         Log.d("MYLOG",""+listdto.size());
         for (HitsDTO x : listdto) {
-            RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl());
+            RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl(), x.getData().getTime());
             recipes.add(item);
         }
         Log.d("MYLOG","DAO finish");
