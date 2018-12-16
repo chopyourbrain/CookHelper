@@ -10,12 +10,12 @@ import msk.android.academy.javatemplate.DTO.RecipesDTO;
 @android.arch.persistence.room.Entity(tableName = "recipes")
 public class RecipeEntity {
 
-    public RecipeEntity(String lable, String image, int yield, String url){
+    public RecipeEntity(String lable, String image, int yield, String url, String time){
         this.image = image;
         this.lable = lable;
         this.yield = yield;
         this.url = url;
- //       this.time = time;
+        this.time = time;
     }
 
     @NonNull

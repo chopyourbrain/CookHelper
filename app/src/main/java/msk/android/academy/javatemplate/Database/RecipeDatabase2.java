@@ -9,7 +9,7 @@ import android.content.Context;
 public abstract class RecipeDatabase2 extends RoomDatabase {
     private static RecipeDatabase2 singleton;
 
-    private static final String DATABASE_NAME = "DBNews3.db";
+    private static final String DATABASE_NAME = "DBrec2222.db";
 
     public abstract RecipeDAO recipeDAO();
 
