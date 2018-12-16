@@ -180,7 +180,7 @@ Log.d(LOG,"load");
     }
 
     public void saveIngridients(ProductEntity[] recipes) {
-        Log.d(LOG, "save Recipes");
+        Log.d(LOG, "save Recipes2");
 
         db.productDAO().deleteAll();
         db.productDAO().insertAll(recipes);
