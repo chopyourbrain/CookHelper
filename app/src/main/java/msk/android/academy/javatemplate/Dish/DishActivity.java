@@ -81,6 +81,13 @@ public class DishActivity extends AppCompatActivity {
         startActivity(productActivityIntent);
     };
 
+    private final DishAdapter.OnItemClickListener1 clk = dish ->
+    {
+        //  listener.onNewsDetailsClicked(news.getUrl());
+        db.recipeDAO().delete(dish.getUrl());
+        updateRecipe();
+    };
+
     public Single<List<RecipeEntity>> getRecipe() {
         db = RecipeDatabase2.getAppDatabase(this);
         Log.d(LOG,"getRecipe");
@@ -89,7 +96,7 @@ public class DishActivity extends AppCompatActivity {
 
     public void showDishes(List<Dish> dishes) {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView.setAdapter(new DishAdapter(context, dishes, clickListener));
+            recyclerView.setAdapter(new DishAdapter(context, dishes, clickListener,clk));
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);
@@ -116,6 +123,12 @@ public class DishActivity extends AppCompatActivity {
             Intent intent = new Intent(this, NewDishActivity.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        updateRecipe();
     }
 
     public void updateRecipe() {
