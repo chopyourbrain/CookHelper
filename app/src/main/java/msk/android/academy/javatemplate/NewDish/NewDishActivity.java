@@ -83,7 +83,9 @@ public class NewDishActivity extends AppCompatActivity {
     {
         //  listener.onNewsDetailsClicked(news.getUrl());
         db2.recipeDAO().insert(new RecipeEntity(dish.getName(), dish.getImageUrl(), dish.getPersons(), dish.getUrl(), dish.getTime()));
-        //this.finish();
+        db2.productDAO().deleteAll();
+        db2.productDAO().insertAll(db.productDAO().getById(dish.getUrl()).toArray(new ProductEntity[db.productDAO().getById(dish.getUrl()).size()]));
+       // this.finish();
     };
 
     public Single<List<RecipeEntity>> getRecipes() {
