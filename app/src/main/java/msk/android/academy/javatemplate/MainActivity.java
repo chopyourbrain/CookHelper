@@ -7,6 +7,8 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +44,13 @@ public class MainActivity extends AppCompatActivity {
         {
             Intent intent = new Intent(this, DishActivity.class);
             startActivity(intent);
+            Animatoo.animateShrink(this);
         });
         cd2.setOnClickListener(v->
         {
             Intent intent = new Intent(this, ProductActivity.class);
             startActivity(intent);
+            Animatoo.animateShrink(this);
         });
     }
 

@@ -11,6 +11,8 @@ import android.util.Log;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
