@@ -41,7 +41,7 @@ public class NewDishAdapter extends RecyclerView.Adapter<NewDishAdapter.ViewHold
 
     @Override
     public NewDishAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NewDishAdapter.ViewHolder(inflater.inflate(R.layout.activity_recipes, parent, false), clickListener);
+        return new NewDishAdapter.ViewHolder(inflater.inflate(R.layout.item_add, parent, false), clickListener);
     }
 
     @Override
@@ -49,8 +49,8 @@ public class NewDishAdapter extends RecyclerView.Adapter<NewDishAdapter.ViewHold
         Dish dish = dishes.get(position);
 
         holder.nameView.setText(dish.getName());
-        holder.timeView.setText("Время приготовления"+dish.getTime());
-        holder.personsView.setText("Количество персон: "+dish.getPersons());
+        holder.timeView.setText("Время приготовления" + dish.getTime());
+        holder.personsView.setText("Количество персон: " + dish.getPersons());
 
         Glide.with(context).load(dish.getImageUrl()).into(holder.imageView);
     }
@@ -69,11 +69,11 @@ public class NewDishAdapter extends RecyclerView.Adapter<NewDishAdapter.ViewHold
         private ViewHolder(View itemView, @Nullable DishAdapter.OnItemClickListener listener) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.image_recept);
-            nameView = itemView.findViewById(R.id.item_recept);
-            timeView = itemView.findViewById(R.id.time);
-            personsView = itemView.findViewById(R.id.item_yield);
-            buttonAdd=itemView.findViewById(R.id.item_recept);
+            imageView = itemView.findViewById(R.id.image_recept_add);
+            nameView = itemView.findViewById(R.id.item_recept_add);
+            timeView = itemView.findViewById(R.id.time_add);
+            personsView = itemView.findViewById(R.id.item_yield_add);
+            buttonAdd = itemView.findViewById(R.id.materialButton);
 
             buttonAdd.setOnClickListener(view ->
             {

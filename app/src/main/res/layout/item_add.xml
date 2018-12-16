@@ -84,11 +84,12 @@
             android:layout_height="@dimen/image_rec"
             android:layout_marginTop="@dimen/marg_top"
             android:layout_marginEnd="@dimen/marg_end_bott"
+            android:background="@drawable/ic_checked"
             android:scaleType="centerCrop"
+            android:theme="@style/PrimaryFlatButton"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/item_yield_add"
-            android:theme="@style/PrimaryFlatButton"
-            android:background="@drawable/ic_checked"
             tools:ignore="MissingConstraints" />
     </android.support.constraint.ConstraintLayout>
 

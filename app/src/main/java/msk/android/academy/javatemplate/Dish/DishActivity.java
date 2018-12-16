@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,27 +28,31 @@ import msk.android.academy.javatemplate.DTO.RecipesResponse;
 import msk.android.academy.javatemplate.Database.ProductEntity;
 import msk.android.academy.javatemplate.Database.RecipeDAO;
 import msk.android.academy.javatemplate.Database.RecipeDatabase;
+import msk.android.academy.javatemplate.Database.RecipeDatabase2;
 import msk.android.academy.javatemplate.Database.RecipeEntity;
 import msk.android.academy.javatemplate.NET.Network;
+import msk.android.academy.javatemplate.NewDish.NewDishActivity;
 import msk.android.academy.javatemplate.Product.ProductActivity;
 import msk.android.academy.javatemplate.R;
+import msk.android.academy.javatemplate.RecipeDetailsActivity;
 
 public class DishActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     Context context;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     String LOG = "My_Log";
-    private RecipeDatabase db;
+    private RecipeDatabase2 db;
+    FloatingActionButton fb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
         context = getBaseContext();
-        db = RecipeDatabase.getAppDatabase(this);
+        db = RecipeDatabase2.getAppDatabase(this);
         initViews();
         updateRecipe();
-        loadRecipes("pork");
+       // loadRecipes("pork");
     }
 
     @Override
@@ -71,13 +76,13 @@ public class DishActivity extends AppCompatActivity {
     private final DishAdapter.OnItemClickListener clickListener = dish ->
     {
         //  listener.onNewsDetailsClicked(news.getUrl());
-        Intent productActivityIntent = new Intent(this, ProductActivity.class);
+        Intent productActivityIntent = new Intent(this, RecipeDetailsActivity.class);
         productActivityIntent.putExtra("url", dish.getUrl());
         startActivity(productActivityIntent);
     };
 
     public Single<List<RecipeEntity>> getRecipe() {
-        db = RecipeDatabase.getAppDatabase(this);
+        db = RecipeDatabase2.getAppDatabase(this);
         Log.d(LOG,"getRecipe");
         return db.recipeDAO().getAll();
     }
@@ -105,6 +110,12 @@ public class DishActivity extends AppCompatActivity {
 
     private void initViews() {
         recyclerView = findViewById(R.id.recycler_second);
+        fb=findViewById(R.id.floatingActionButton);
+        fb.setOnClickListener(v->
+        {
+            Intent intent = new Intent(this, NewDishActivity.class);
+            startActivity(intent);
+        });
     }
 
     public void updateRecipe() {
@@ -130,24 +141,7 @@ public class DishActivity extends AppCompatActivity {
     }
 
 
-    private void loadRecipes(@NonNull String search) {
-Log.d(LOG,"load");
-        final Disposable searchDisposable = Network.getInstance()
-                .recipes()
-                .search(search)
-                .map(this::toDAO)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::saveRecipes, this::handleError);
-        compositeDisposable.add(searchDisposable);
-    }
 
-    private void handleError(Throwable throwable) {
-        if (throwable instanceof IOException) {
-            Toast.makeText(this, "ERROR: Check your internet connection", Toast.LENGTH_LONG);
-            return;
-        }
-    }
 
 
     private RecipeEntity[] toDAO(@NonNull RecipesResponse response) {
@@ -163,12 +157,6 @@ Log.d(LOG,"load");
         return recipes.toArray(new RecipeEntity[recipes.size()]);
     }
 
-    public void saveRecipes(RecipeEntity[] recipes) {
-        Log.d(LOG, "save Recipes");
 
-        db.recipeDAO().deleteAll();
-        db.recipeDAO().insertAll(recipes);
-        Log.d(LOG, "save " + recipes.length + " news to DB");
-    }
 
 }
