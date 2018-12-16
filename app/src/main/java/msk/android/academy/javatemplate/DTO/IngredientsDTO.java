@@ -14,9 +14,9 @@ public class IngredientsDTO {
     {
         return text;
     }
-    public String getWeight()
+    public float getWeight()
     {
-        return text;
+        return weight;
     }
 
 }
