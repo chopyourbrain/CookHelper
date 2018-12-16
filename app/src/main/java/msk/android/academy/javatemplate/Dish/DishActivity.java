@@ -47,7 +47,7 @@ public class DishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         context = getBaseContext();
         db = RecipeDatabase.getAppDatabase(this);
-
+        loadRecipes("pork");
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
@@ -69,7 +69,6 @@ public class DishActivity extends AppCompatActivity {
         });
 
     }
-
 
     @Override
     protected void onStop() {
