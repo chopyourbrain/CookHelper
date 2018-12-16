@@ -1,7 +1,6 @@
 package msk.android.academy.javatemplate.NewDish;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +23,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import msk.android.academy.javatemplate.DTO.HitsDTO;
 import msk.android.academy.javatemplate.DTO.IngredientsDTO;
-import msk.android.academy.javatemplate.DTO.RecipesDTO;
 import msk.android.academy.javatemplate.DTO.RecipesResponse;
 import msk.android.academy.javatemplate.Database.ProductEntity;
 import msk.android.academy.javatemplate.Database.RecipeDatabase;
@@ -33,7 +31,6 @@ import msk.android.academy.javatemplate.Database.RecipeEntity;
 import msk.android.academy.javatemplate.Dish.Dish;
 import msk.android.academy.javatemplate.Dish.DishAdapter;
 import msk.android.academy.javatemplate.NET.Network;
-import msk.android.academy.javatemplate.Product.ProductActivity;
 import msk.android.academy.javatemplate.R;
 
 public class NewDishActivity extends AppCompatActivity {
@@ -88,7 +85,7 @@ public class NewDishActivity extends AppCompatActivity {
         db2.recipeDAO().insert(new RecipeEntity(dish.getName(), dish.getImageUrl(), dish.getPersons(), dish.getUrl(), dish.getTime()));
         db2.productDAO().deleteAll();
         db2.productDAO().insertAll(db.productDAO().getById(dish.getUrl()).toArray(new ProductEntity[db.productDAO().getById(dish.getUrl()).size()]));
-        this.finish();
+       // this.finish();
     };
 
     public Single<List<RecipeEntity>> getRecipes() {
