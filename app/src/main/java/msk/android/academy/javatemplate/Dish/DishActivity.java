@@ -10,6 +10,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import msk.android.academy.javatemplate.DTO.HitsDTO;
+import msk.android.academy.javatemplate.DTO.IngredientsDTO;
 import msk.android.academy.javatemplate.DTO.RecipesDTO;
 import msk.android.academy.javatemplate.DTO.RecipesResponse;
 import msk.android.academy.javatemplate.Database.ProductEntity;
@@ -51,6 +53,9 @@ public class DishActivity extends AppCompatActivity {
         context = getBaseContext();
         db = RecipeDatabase2.getAppDatabase(this);
         initViews();
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
         updateRecipe();
        // loadRecipes("pork");
     }
@@ -99,9 +104,7 @@ public class DishActivity extends AppCompatActivity {
             recyclerView.setAdapter(new DishAdapter(context, dishes, clickListener,clk));
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);
-            recyclerView.addItemDecoration(dividerItemDecoration);
-        } /*else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+             } /*else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
             recyclerView.setAdapter(new DishAdapter(getContext(), news, clickListener));
             if (MainActivity.isTwoPanel) {

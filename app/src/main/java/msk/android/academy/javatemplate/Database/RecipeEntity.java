@@ -15,6 +15,7 @@ public class RecipeEntity {
         this.lable = lable;
         this.yield = yield;
         this.url = url;
+ //       this.time = time;
     }
 
     @NonNull
@@ -72,16 +73,22 @@ public class RecipeEntity {
     @ColumnInfo(name = "yield")
     private int yield;
 
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    @ColumnInfo(name = "time")
+    private int time;
+
 
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "url")
     private String url;
-
-    public RecipeEntity convert(RecipesDTO dto) {
-        RecipeEntity item = new RecipeEntity(dto.getLabel(), dto.getImage(), dto.getYield(),dto.getUrl());
-        return item;
-    }
 
 
 }

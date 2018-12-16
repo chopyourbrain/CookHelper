@@ -98,7 +98,7 @@ public class ProductActivity extends AppCompatActivity {
         Log.d(LOG, "get " + products_.size() + " product");
         List<Product> products = new ArrayList<>();
         for (ProductEntity x : products_) {
-            products.add(new Product(x.getId(), x.getName(), x.getName(), x.getRecipe_id()));
+         //   products.add(new Product(x.getId(), x.getName(), x.getName(), x.getRecipe_id()));
         }
         return products;
     }
