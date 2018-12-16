@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+
 import msk.android.academy.javatemplate.R;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
@@ -45,7 +46,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         Product product = products.get(position);
 
         holder.nameView.setText(product.getName());
-        holder.countView.setText("Количество "+product.getWeight());
+        holder.countView.setText(product.getWeight()+"");
+        holder.balanceView.setText(product.getBalance()+"");
     }
 
 
@@ -53,14 +55,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         private final TextView nameView;
         private final TextView countView;
         private final TextView balanceView;
-        private  final Button butMinus;
-        private  final Button butPlus;
+        private final Button butMinus;
+        private final Button butPlus;
 
         private ViewHolder(View itemView) {
             super(itemView);
 
-            nameView = itemView.findViewById(R.id.item_recept);
-           countView = itemView.findViewById(R.id.item_yield);
+            nameView = itemView.findViewById(R.id.item_products);
+            countView = itemView.findViewById(R.id.need);
+            balanceView = itemView.findViewById(R.id.count_need);
+            butMinus=itemView.findViewById(R.id.minus_button);
+            butPlus=itemView.findViewById(R.id.plus_button);
         }
     }
 

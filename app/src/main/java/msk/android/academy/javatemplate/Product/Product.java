@@ -3,12 +3,12 @@ package msk.android.academy.javatemplate.Product;
 public class Product {
     private int id;
     private String name;
-    private String weight;
+    private float weight;
     private String idDish;
-    private int balance;
+    private float balance;
     private boolean check;
 
-    public int getBalance() {
+    public float getBalance() {
         return balance;
     }
 
@@ -24,13 +24,13 @@ public class Product {
         this.check = check;
     }
 
-    public Product(String name, String weight, String idDish) {
+    public Product(String name, float weight, float balance, String idDish) {
 
         this.name = name;
         this.weight = weight;
         this.idDish = idDish;
         this.check = false;
-        this.balance = 0;
+        this.balance = balance;
     }
 
     public int getId() {
@@ -50,11 +50,11 @@ public class Product {
         this.name = name;
     }
 
-    public String getWeight() {
+    public float getWeight() {
         return weight;
     }
 
-    public void setWeight(String weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 

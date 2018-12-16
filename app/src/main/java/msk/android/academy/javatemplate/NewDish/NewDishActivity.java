@@ -85,6 +85,7 @@ public class NewDishActivity extends AppCompatActivity {
     private final DishAdapter.OnItemClickListener clickListener = dish ->
     {
         //  listener.onNewsDetailsClicked(news.getUrl());
+       // db2.productDAO().insertAll(db.productDAO().getById());
         db2.recipeDAO().insert(new RecipeEntity(dish.getName(), dish.getImageUrl(), dish.getPersons(), dish.getUrl(), dish.getTime()));
         this.finish();
     };
@@ -192,7 +193,7 @@ public class NewDishActivity extends AppCompatActivity {
     public void saveIngridients(ProductEntity[] recipes) {
         Log.d(LOG, "save Recipes");
 
-        db.productDAO().deleteAll();
+       // db.productDAO().deleteAll();
         db.productDAO().insertAll(recipes);
         Log.d(LOG, "save " + recipes.length + " news to DB");
     }
