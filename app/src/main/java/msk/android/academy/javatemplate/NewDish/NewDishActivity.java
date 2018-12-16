@@ -112,7 +112,7 @@ public class NewDishActivity extends AppCompatActivity {
         Log.d(LOG, "get " + recipes.size() + " recipes");
         List<Dish> dishes = new ArrayList<>();
         for (RecipeEntity x : recipes) {
-            dishes.add(new Dish(x.getId(),x.getLable(), x.getUrl(), x.getYield(), x.getImage()));
+            dishes.add(new Dish(x.getId(),x.getLable(), x.getUrl(), x.getYield(), x.getImage(), x.getTime()));
         }
         return dishes;
     }

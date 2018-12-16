@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,6 +52,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView nameView;
         private final TextView countView;
+        private final TextView balanceView;
+        private  final Button butMinus;
+        private  final Button butPlus;
 
         private ViewHolder(View itemView) {
             super(itemView);

@@ -73,16 +73,16 @@ public class RecipeEntity {
     @ColumnInfo(name = "yield")
     private int yield;
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
     @ColumnInfo(name = "time")
-    private int time;
+    private String time;
 
 
     @PrimaryKey
