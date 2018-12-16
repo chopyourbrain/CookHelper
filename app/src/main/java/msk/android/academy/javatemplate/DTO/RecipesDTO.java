@@ -42,6 +42,10 @@ public class RecipesDTO {
 //        return ingr;
 //    }
 
+    public List<IngredientsDTO> getIngredients() {
+        return ingredients;
+    }
+
     public String getLabel() {
         Log.d("MYLOG","Lable = "+label);
         Log.d("MYLOG","ingr = "+ingredients.get(0).getText());
