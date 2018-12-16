@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,24 +7,29 @@
     android:layout_height="match_parent">
 
     <SearchView
-        android:id="@+id/search_add"
+        android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        android:visibility="visible"
+
+        tools:ignore="MissingConstraints" />
 
     <android.support.v7.widget.RecyclerView
 
         android:id="@+id/recycler_add"
         android:layout_width="match_parent"
-        android:layout_height="465dp"
+        android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:padding="@dimen/padding"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_add"
+        android:padding="4dp"
+        android:layout_below="@id/search"
+
         tools:context=".add_dish"
         tools:listitem="@layout/item_add">
 
     </android.support.v7.widget.RecyclerView>
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

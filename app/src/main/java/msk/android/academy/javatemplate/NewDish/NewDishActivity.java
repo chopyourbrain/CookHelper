@@ -55,7 +55,7 @@ public class NewDishActivity extends AppCompatActivity {
         loadRecipes("chicken");
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);
         recyclerView.addItemDecoration(dividerItemDecoration);
-        SearchView searchView = (SearchView) findViewById(R.id.search_add);
+        SearchView searchView = (SearchView) findViewById(R.id.search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
