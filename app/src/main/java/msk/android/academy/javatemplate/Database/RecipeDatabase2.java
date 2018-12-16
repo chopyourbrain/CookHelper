@@ -6,21 +6,21 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 @Database(entities = {RecipeEntity.class, ProductEntity.class}, version = 1)
-public abstract class RecipeDatabase extends RoomDatabase {
-    private static RecipeDatabase singleton;
+public abstract class RecipeDatabase2 extends RoomDatabase {
+    private static RecipeDatabase2 singleton;
 
-    private static final String DATABASE_NAME = "DBrecipe.db";
+    private static final String DATABASE_NAME = "DBrec2222.db";
 
     public abstract RecipeDAO recipeDAO();
 
     public abstract ProductDAO productDAO();
 
-    public static RecipeDatabase getAppDatabase(Context context) {
+    public static RecipeDatabase2 getAppDatabase(Context context) {
         if (singleton == null) {
-            synchronized (RecipeDatabase.class) {
+            synchronized (RecipeDatabase2.class) {
                 if (singleton == null) {
                     singleton = Room.databaseBuilder(context.getApplicationContext(),
-                            RecipeDatabase.class,
+                            RecipeDatabase2.class,
                             DATABASE_NAME)
                             .allowMainThreadQueries()
                             .build();

@@ -9,6 +9,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -22,9 +23,12 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import msk.android.academy.javatemplate.DTO.HitsDTO;
+import msk.android.academy.javatemplate.DTO.IngredientsDTO;
 import msk.android.academy.javatemplate.DTO.RecipesDTO;
 import msk.android.academy.javatemplate.DTO.RecipesResponse;
+import msk.android.academy.javatemplate.Database.ProductEntity;
 import msk.android.academy.javatemplate.Database.RecipeDatabase;
+import msk.android.academy.javatemplate.Database.RecipeDatabase2;
 import msk.android.academy.javatemplate.Database.RecipeEntity;
 import msk.android.academy.javatemplate.Dish.Dish;
 import msk.android.academy.javatemplate.Dish.DishAdapter;
@@ -38,15 +42,37 @@ public class NewDishActivity extends AppCompatActivity {
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     String LOG = "My_Log";
     private RecipeDatabase db;
+    private RecipeDatabase2 db2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipes);
+        setContentView(R.layout.activity_add_dish);
         context = getBaseContext();
         db = RecipeDatabase.getAppDatabase(this);
+        db2 = RecipeDatabase2.getAppDatabase(this);
         initViews();
         updateRecipe();
+        loadRecipes("chicken");
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        SearchView searchView = (SearchView) findViewById(R.id.search_add);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                loadRecipes(query);
+                updateRecipe();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //loadRecipes(newText);
+                // updateRecipe();
+                return false;
+            }
+        });
+
     }
 
     @Override
@@ -59,9 +85,8 @@ public class NewDishActivity extends AppCompatActivity {
     private final DishAdapter.OnItemClickListener clickListener = dish ->
     {
         //  listener.onNewsDetailsClicked(news.getUrl());
-        Intent productActivityIntent = new Intent(this, ProductActivity.class);
-        productActivityIntent.putExtra("url", dish.getUrl());
-        startActivity(productActivityIntent);
+        db2.recipeDAO().insert(new RecipeEntity(dish.getName(), dish.getImageUrl(), dish.getPersons(), dish.getUrl(), dish.getTime()));
+        this.finish();
     };
 
     public Single<List<RecipeEntity>> getRecipes() {
@@ -72,11 +97,9 @@ public class NewDishActivity extends AppCompatActivity {
 
     public void showDishes(List<Dish> dishes) {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView.setAdapter(new DishAdapter(context, dishes, clickListener));
+            recyclerView.setAdapter(new NewDishAdapter(context, dishes, clickListener));
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);
-            recyclerView.addItemDecoration(dividerItemDecoration);
         } /*else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
             recyclerView.setAdapter(new DishAdapter(getContext(), news, clickListener));
@@ -92,7 +115,7 @@ public class NewDishActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        recyclerView = findViewById(R.id.recycler_second);
+        recyclerView = findViewById(R.id.recycler_add);
     }
 
     public void updateRecipe() {
@@ -109,7 +132,7 @@ public class NewDishActivity extends AppCompatActivity {
         Log.d(LOG, "get " + recipes.size() + " recipes");
         List<Dish> dishes = new ArrayList<>();
         for (RecipeEntity x : recipes) {
-            dishes.add(new Dish(x.getId(),x.getLable(), x.getUrl(), x.getYield(), x.getImage()));
+            dishes.add(new Dish(x.getId(),x.getLable(), x.getUrl(), x.getYield(), x.getImage(),x.getTime()));
         }
         return dishes;
     }
@@ -141,18 +164,38 @@ public class NewDishActivity extends AppCompatActivity {
     private RecipeEntity[] toDAO(@NonNull RecipesResponse response) {
         List<HitsDTO> listdto = response.getData();
         List<RecipeEntity> recipes = new ArrayList<RecipeEntity>();
+        List<ProductEntity> products = new ArrayList<ProductEntity>();
+        List<IngredientsDTO> ingredients = new ArrayList<IngredientsDTO>();
         Log.d("MYLOG","DAO");
-        Log.d("MYLOG",""+listdto.size());
+        Log.d("MYLOG","size: "+listdto.size());
         for (HitsDTO x : listdto) {
-            RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl());
+            RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl(),x.getData().getTime());
             recipes.add(item);
+            for (IngredientsDTO y : x.getData().getIngredients()) {
+                ProductEntity productEntity = new ProductEntity(y.getText(), x.getData().getUrl(), y.getWeight(), y.getWeight(), false);
+                products.add(productEntity);
+            }
         }
+        saveIngridients(products.toArray(new ProductEntity[products.size()]));
+        Log.d("MYLOG","DAO finish");
         return recipes.toArray(new RecipeEntity[recipes.size()]);
     }
 
     public void saveRecipes(RecipeEntity[] recipes) {
+        Log.d(LOG, "save Recipes");
+
         db.recipeDAO().deleteAll();
         db.recipeDAO().insertAll(recipes);
+        Log.d(LOG, "save " + recipes.length + " news to DB");
     }
+
+    public void saveIngridients(ProductEntity[] recipes) {
+        Log.d(LOG, "save Recipes");
+
+        db.productDAO().deleteAll();
+        db.productDAO().insertAll(recipes);
+        Log.d(LOG, "save " + recipes.length + " news to DB");
+    }
+
 
 }

@@ -10,11 +10,12 @@ import msk.android.academy.javatemplate.DTO.RecipesDTO;
 @android.arch.persistence.room.Entity(tableName = "recipes")
 public class RecipeEntity {
 
-    public RecipeEntity(String lable, String image, int yield, String url){
+    public RecipeEntity(String lable, String image, int yield, String url, String time){
         this.image = image;
         this.lable = lable;
         this.yield = yield;
         this.url = url;
+        this.time = time;
     }
 
     @NonNull
@@ -72,16 +73,22 @@ public class RecipeEntity {
     @ColumnInfo(name = "yield")
     private int yield;
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    @ColumnInfo(name = "time")
+    private String time;
+
 
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "url")
     private String url;
-
-    public RecipeEntity convert(RecipesDTO dto) {
-        RecipeEntity item = new RecipeEntity(dto.getLabel(), dto.getImage(), dto.getYield(),dto.getUrl());
-        return item;
-    }
 
 
 }

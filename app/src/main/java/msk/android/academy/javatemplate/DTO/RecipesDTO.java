@@ -23,13 +23,13 @@ public class RecipesDTO {
     private int yield;
 
     @SerializedName("totalTime")
-    private int time;
+    private String time;
 
     public String getImage() {
         return image;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 

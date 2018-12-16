@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,9 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:paddingTop="@android:dimen/notification_large_icon_height"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_second"
-        app:layout_constraintTop_toTopOf="parent"
+
+
+        android:visibility="visible"
+
         tools:ignore="MissingConstraints" />
 
     <android.support.v7.widget.RecyclerView
@@ -22,8 +23,7 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:padding="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search"
+  android:layout_below="@id/search"
         tools:context=".recipes"
         tools:listitem="@layout/item_rec_sec">
 
@@ -38,9 +38,9 @@
         android:clickable="true"
         android:focusable="true"
         app:backgroundTint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         app:srcCompat="@drawable/ic_add" />
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

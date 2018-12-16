@@ -1,58 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/padding"
+    android:layout_margin="4dp"
     android:elevation="@dimen/padding"
     android:orientation="vertical"
-    android:divider="@android:color/transparent"
-    android:dividerHeight="0.0px"
-    android:clipToPadding="false"
-    android:clipChildren="false"
-    app:cardElevation="10dp"
-    app:cardPreventCornerOverlap="false"
-    >
+    android:padding="@dimen/padding">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding"
-        tools:showIn="@layout/activity_add_dish"
-        >
+        tools:showIn="@layout/activity_add_dish">
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/item_recept_add"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="@dimen/marg_top"
-            android:layout_marginStart="@dimen/marg_end_bott"
-            android:layout_marginEnd="@dimen/marg_top"
-            android:fontFamily="casual"
             android:layout_weight="1"
+            android:fontFamily="casual"
+            android:gravity="center_horizontal"
             android:maxLines="1"
-            android:textStyle="bold"
             android:textSize="@dimen/text_size_title"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/image_recept_add"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/cities"
-            />
+            tools:text="@tools:sample/cities" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/image_recept_add"
-            android:layout_width="@dimen/image"
-            android:layout_height="@dimen/image"
+            android:layout_width="@dimen/image_rec"
+            android:layout_height="@dimen/image_rec"
             android:layout_marginTop="@dimen/marg_top"
-            android:layout_marginBottom="@dimen/marg_end_bott"
             android:layout_marginEnd="@dimen/marg_end_bott"
+            android:layout_marginBottom="@dimen/marg_end_bott"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/item_yield_add"
             tools:ignore="MissingConstraints"
             tools:src="@tools:sample/avatars" />
 
@@ -93,12 +80,12 @@
             android:layout_height="@dimen/image_rec"
             android:layout_marginTop="@dimen/marg_top"
             android:layout_marginEnd="@dimen/marg_end_bott"
+            android:background="@drawable/ic_checked"
             android:scaleType="centerCrop"
+            android:theme="@style/PrimaryFlatButton"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/item_yield_add"
-            android:theme="@style/PrimaryFlatButton"
-            android:textSize="0sp"
-            android:background="@drawable/ic_checked"
             tools:ignore="MissingConstraints" />
     </android.support.constraint.ConstraintLayout>
 

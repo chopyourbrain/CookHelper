@@ -13,12 +13,13 @@ public class Dish {
     private String time;
     private List<Product> products;
 
-    public Dish(int id, String name, String url, int persons, String imageUrl) {
+    public Dish(int id, String name, String url, int persons, String imageUrl, String time) {
         this.id = id;
         this.name = name;
         this.persons = persons;
         this.url = url;
         this.imageUrl=imageUrl;
+        this.time=time;
         //Достаем продукты
     }
 
