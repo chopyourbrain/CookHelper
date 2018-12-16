@@ -25,6 +25,7 @@ import msk.android.academy.javatemplate.DTO.RecipesDTO;
 import msk.android.academy.javatemplate.DTO.RecipesResponse;
 import msk.android.academy.javatemplate.Database.ProductEntity;
 import msk.android.academy.javatemplate.Database.RecipeDatabase;
+import msk.android.academy.javatemplate.Database.RecipeDatabase2;
 import msk.android.academy.javatemplate.Database.RecipeEntity;
 import msk.android.academy.javatemplate.Dish.Dish;
 import msk.android.academy.javatemplate.Dish.DishAdapter;
@@ -36,14 +37,14 @@ public class ProductActivity extends AppCompatActivity {
     Context context;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     String LOG = "My_Log";
-    private RecipeDatabase db;
+    private RecipeDatabase2 db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
         context = getBaseContext();
-        db = RecipeDatabase.getAppDatabase(this);
+        db = RecipeDatabase2.getAppDatabase(this);
         initViews();
         updateProducts();
     }
@@ -89,7 +90,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     public Single<List<ProductEntity>> getProducts() {
-        db = RecipeDatabase.getAppDatabase(this);
+        db = RecipeDatabase2.getAppDatabase(this);
         Log.d(LOG,"getRecipe");
         return db.productDAO().getAll();
     }
@@ -98,7 +99,7 @@ public class ProductActivity extends AppCompatActivity {
         Log.d(LOG, "get " + products_.size() + " product");
         List<Product> products = new ArrayList<>();
         for (ProductEntity x : products_) {
-         //   products.add(new Product(x.getId(), x.getName(), x.getName(), x.getRecipe_id()));
+           products.add(new Product(x.getId(), x.getName(), x.getName(), x.getRecipe_id()));
         }
         return products;
     }

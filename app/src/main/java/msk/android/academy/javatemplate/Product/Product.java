@@ -4,10 +4,10 @@ public class Product {
     private int id;
     private String name;
     private String weight;
-    private int idDish;
+    private String idDish;
     private boolean check;
 
-    public Product(int id, String name, String weight, int idDish) {
+    public Product(int id, String name, String weight, String idDish) {
         this.id = id;
         this.name = name;
         this.weight = weight;
@@ -40,11 +40,11 @@ public class Product {
         this.weight = weight;
     }
 
-    public int getIdDish() {
+    public String getIdDish() {
         return idDish;
     }
 
-    public void setIdDish(int idDish) {
+    public void setIdDish(String idDish) {
         this.idDish = idDish;
     }
 }

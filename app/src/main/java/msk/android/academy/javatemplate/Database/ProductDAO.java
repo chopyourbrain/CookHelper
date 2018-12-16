@@ -29,4 +29,6 @@ public interface ProductDAO {
     @Query("DELETE FROM products")
     void deleteAll();
 
+    @Query("SELECT * FROM products WHERE recipe_id = :url")
+    List<ProductEntity> getById(String url);
 }
