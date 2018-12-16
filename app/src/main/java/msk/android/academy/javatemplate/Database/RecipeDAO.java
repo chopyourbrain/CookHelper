@@ -27,12 +27,12 @@ public interface RecipeDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(RecipeEntity recipes);
 
-    @Delete
-    void delete(RecipeEntity recipes);
+    @Query("DELETE FROM recipes WHERE url = :id")
+    void delete(String id);
 
     @Query("DELETE FROM recipes")
     void deleteAll();
 
     @Query("SELECT * FROM products WHERE (recipe_id = :myid)")
-    Single<List<ProductEntity>> getProducts(int myid);
+    Single<List<ProductEntity>> getProducts(String myid);
 }

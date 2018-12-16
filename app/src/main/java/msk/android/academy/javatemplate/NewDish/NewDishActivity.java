@@ -25,6 +25,7 @@ import msk.android.academy.javatemplate.DTO.HitsDTO;
 import msk.android.academy.javatemplate.DTO.RecipesDTO;
 import msk.android.academy.javatemplate.DTO.RecipesResponse;
 import msk.android.academy.javatemplate.Database.RecipeDatabase;
+import msk.android.academy.javatemplate.Database.RecipeDatabase2;
 import msk.android.academy.javatemplate.Database.RecipeEntity;
 import msk.android.academy.javatemplate.Dish.Dish;
 import msk.android.academy.javatemplate.Dish.DishAdapter;
@@ -38,15 +39,18 @@ public class NewDishActivity extends AppCompatActivity {
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     String LOG = "My_Log";
     private RecipeDatabase db;
+    private RecipeDatabase2 db2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipes);
+        setContentView(R.layout.activity_add_dish);
         context = getBaseContext();
         db = RecipeDatabase.getAppDatabase(this);
+        db2 = RecipeDatabase2.getAppDatabase(this);
         initViews();
         updateRecipe();
+        loadRecipes("chicken");
     }
 
     @Override
@@ -59,9 +63,8 @@ public class NewDishActivity extends AppCompatActivity {
     private final DishAdapter.OnItemClickListener clickListener = dish ->
     {
         //  listener.onNewsDetailsClicked(news.getUrl());
-        Intent productActivityIntent = new Intent(this, ProductActivity.class);
-        productActivityIntent.putExtra("url", dish.getUrl());
-        startActivity(productActivityIntent);
+        db2.recipeDAO().insert(new RecipeEntity(dish.getName(), dish.getImageUrl(), dish.getPersons(), dish.getUrl()));
+        this.finish();
     };
 
     public Single<List<RecipeEntity>> getRecipes() {
@@ -72,7 +75,7 @@ public class NewDishActivity extends AppCompatActivity {
 
     public void showDishes(List<Dish> dishes) {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView.setAdapter(new DishAdapter(context, dishes, clickListener));
+            recyclerView.setAdapter(new NewDishAdapter(context, dishes, clickListener));
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), 1);
@@ -92,7 +95,7 @@ public class NewDishActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        recyclerView = findViewById(R.id.recycler_second);
+        recyclerView = findViewById(R.id.recycler_add);
     }
 
     public void updateRecipe() {
