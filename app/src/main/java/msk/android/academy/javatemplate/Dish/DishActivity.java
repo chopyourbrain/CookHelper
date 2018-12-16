@@ -45,9 +45,9 @@ public class DishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         context = getBaseContext();
         db = RecipeDatabase.getAppDatabase(this);
-        loadRecipes("pork");
         initViews();
         updateRecipe();
+        loadRecipes("pork");
     }
 
     @Override
@@ -131,7 +131,7 @@ public class DishActivity extends AppCompatActivity {
 
 
     private void loadRecipes(@NonNull String search) {
-
+Log.d(LOG,"load");
         final Disposable searchDisposable = Network.getInstance()
                 .recipes()
                 .search(search)
@@ -154,16 +154,18 @@ public class DishActivity extends AppCompatActivity {
         List<HitsDTO> listdto = response.getData();
         List<RecipeEntity> recipes = new ArrayList<RecipeEntity>();
         Log.d("MYLOG","DAO");
-        Log.d("MYLOG","size: "+listdto.size());
+        Log.d("MYLOG",""+listdto.size());
         for (HitsDTO x : listdto) {
             RecipeEntity item = new RecipeEntity(x.getData().getLabel(), x.getData().getImage(), x.getData().getYield(),x.getData().getUrl());
             recipes.add(item);
         }
+        Log.d("MYLOG","DAO finish");
         return recipes.toArray(new RecipeEntity[recipes.size()]);
     }
 
     public void saveRecipes(RecipeEntity[] recipes) {
-        Log.d(LOG, "save Recives");
+        Log.d(LOG, "save Recipes");
+
         db.recipeDAO().deleteAll();
         db.recipeDAO().insertAll(recipes);
         Log.d(LOG, "save " + recipes.length + " news to DB");
